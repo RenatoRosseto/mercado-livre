@@ -5,9 +5,8 @@ import {
   GlobalStyleComponent,
 } from 'styled-components';
 
-type GlobalStylesProps = {
-  removeBg?: boolean;
-};
+// eslint-disable-next-line @typescript-eslint/ban-types
+type GlobalStylesProps = {};
 
 const GlobalStyles: GlobalStyleComponent<
   GlobalStylesProps,
@@ -53,18 +52,11 @@ const GlobalStyles: GlobalStyleComponent<
       box-sizing: inherit;
     }
   }
-  ${({ theme, removeBg }) => css`
-    html {
-      font-size: 62.5%;
-    }
-
+  ${({ theme }) => css`
     body {
       font-family: ${theme.font.family};
       font-size: ${theme.font.sizes.medium};
-      ${!removeBg &&
-      css`
-        background-color: ${theme.colors.mainBg};
-      `}
+      background-color: ${theme.colors.mainBg};
     }
   `}
 `;

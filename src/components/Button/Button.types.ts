@@ -1,17 +1,9 @@
-import React from 'react';
+type ButtonSize = 'small' | 'large';
+type ButtonVariant = 'primary' | 'secondary';
 
-// export type ButtonProps = {
-//   primary?: boolean;
-//   size?: 'small' | 'medium' | 'large';
-//   fullWidth?: boolean;
-//   id?: string;
-// };
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    React.AriaAttributes {
-  primary?: boolean;
-  backgroundColor?: string;
-  size?: 'small' | 'medium' | 'large';
+export interface ButtonProps {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   fullWidth?: boolean;
   ariaLabel?: string;
   onClick?: () => void;

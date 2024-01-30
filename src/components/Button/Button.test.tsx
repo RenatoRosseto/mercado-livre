@@ -1,94 +1,38 @@
+import React from 'react';
+import { render, screen, fireEvent } from 'utils/test-utils';
 import each from 'jest-each';
-import { render, screen, fireEvent } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
 
-import Button from './';
+import Button from './Button';
 
-describe('<Button />', () => {
-  it('should render the button component', () => {
-    render(<Button>Botão</Button>);
-
-    expect(screen.getByRole('button')).not.toBeDisabled();
-    expect(screen.getByRole('button')).toBeInTheDocument();
+describe('Button Component', () => {
+  it('renders button with default props', () => {
+    render(<Button>Click me</Button>);
+    const button = screen.getByRole('button');
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveTextContent('Click me');
   });
 
-  it('should render a green button when mobile mode', () => {
-    render(<Button>Botão</Button>);
-
-    expect(screen.getByRole('button')).toHaveStyleRule(
-      'background-color',
-      'green',
-      {
-        media: '(max-width: 768px)',
-      },
-    );
+  it('calls onClick handler when clicked', () => {
+    const handleClick = jest.fn();
+    render(<Button onClick={handleClick}>Click me</Button>);
+    const button = screen.getByRole('button');
+    fireEvent.click(button);
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it('should render button component disabled', () => {
-    const { container } = render(
-      <Button disabled ariaLabel={'botão desabilidado'}>
-        Botão
-      </Button>,
-    );
-
-    // expect(screen.getByText(/Botão/i)).toHaveStyleRule('cursor', 'not-allowed');
-    const button = container.querySelector('button');
-    expect(button).toHaveStyleRule('cursor', 'not-allowed');
-
-    expect(screen.getByLabelText(/botão desabilidado/i)).toBeInTheDocument();
-
-    expect(screen.getByRole('button', { name: /botão/i })).toHaveStyleRule(
-      'opacity',
-      '0.3',
-    );
-
-    expect(screen.getByRole('button')).toBeDisabled();
+  it('applies fullWidth style when fullWidth prop is true', () => {
+    render(<Button fullWidth>Click me</Button>);
+    const button = screen.getByRole('button');
+    expect(button).toHaveStyle('width: 100%;');
   });
 
-  it('should render the button and test the click event', () => {
-    render(<Button>Botão</Button>);
-
-    fireEvent.click(screen.getByText(/Botão/i));
-  });
-
-  describe('styles', () => {
-    each`
-    primary  | color      | backgroundColor  | size        | fontSize  | padding
-    ${true}  | ${'white'} | ${'#1ea7fd'}     | ${'small'}  | ${'12px'} | ${'10px 16px'}
-    ${false} | ${'#333'}  | ${'transparent'} | ${'medium'} | ${'14px'} | ${'11px 20px'}
-    ${false} | ${'#333'}  | ${'transparent'} | ${'large'}  | ${'16px'} | ${'12px 24px'}
-  `.it(
-      'must render the styles correctly primary = $primary | size = $size | fontSize = $fontSize | padding = $padding | backgroundColor = $backgroundColor',
-      ({ primary, color, backgroundColor, size, fontSize, padding }) => {
-        const { container } = render(
-          <Button primary={primary} size={size}>
-            Botão
-          </Button>,
-        );
-
-        const button = container.querySelector('button');
-        expect(button).toHaveStyleRule('color', color);
-
-        expect(button).toHaveStyleRule('background-color', backgroundColor);
-
-        expect(button).toHaveStyleRule('font-size', fontSize);
-
-        expect(button).toHaveStyleRule('padding', padding);
-
-        // expect(screen.getByText(/Botão/i)).toHaveStyleRule('color', color);
-
-        // expect(screen.getByText(/Botão/i)).toHaveStyleRule(
-        //   'background-color',
-        //   backgroundColor,
-        // );
-
-        // expect(screen.getByText(/Botão/i)).toHaveStyleRule(
-        //   'font-size',
-        //   fontSize,
-        // );
-
-        // expect(screen.getByText(/Botão/i)).toHaveStyleRule('padding', padding);
-      },
+  each(['small', 'large']).it('applies size "%s" style', (size) => {
+    render(<Button size={size}>Click me</Button>);
+    const button = screen.getByRole('button');
+    expect(button).toHaveStyle(
+      size === 'small'
+        ? 'font-size: 12px; height: 24px; line-height: 24px; padding: 0px; border-radius: 6px;'
+        : 'font-size: 16px; height: 48px; line-height: 48px; padding: 0 24px; border-radius: 6px;',
     );
   });
 });

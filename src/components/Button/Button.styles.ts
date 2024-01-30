@@ -1,96 +1,73 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
 import { ButtonProps } from './Button.types';
 
-type BtnProps = Pick<
-  ButtonProps,
-  'primary' | 'size' | 'backgroundColor' | 'fullWidth'
->;
-
-const storybookButtonPrimary = `
-  color: white;
-  background-color: #1ea7fd;
-`;
-
-const storybookButtonSecondary = `
-  color: #333;
-  background-color: transparent;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-`;
-
-const storybookButtonSmall = `
-  font-size: 12px;
-  padding: 10px 16px;
-`;
-
-const storybookButtonMedium = `
-  font-size: 14px;
-  padding: 11px 20px;
-`;
-
-const storybookButtonLarge = `
-  font-size: 16px;
-  padding: 12px 24px;
-`;
-
-const storybookButtonFullWidth = `
-  width: 100%;
-`;
-
-const storybookButtonDisabled = `
-  cursor: not-allowed;
-  opacity: 0.3;
-`;
-
-const CustomButton = styled.button<BtnProps>`
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  border: 0;
-  border-radius: 3em;
+const baseButtonStyles = ({ theme }: any) => css`
+  text-decoration: none;
+  border: transparent;
   cursor: pointer;
+  transition: background-color 0.2s ease;
   display: inline-block;
-  line-height: 1;
+  font-weight: ${theme.font.bold};
+  text-align: center;
+`;
 
-  ${({ primary }) =>
-    primary
-      ? `
-      ${storybookButtonPrimary}
-  `
-      : `
-      ${storybookButtonSecondary}
-  `}
+const sizeStyles = ({ theme, size }: any) => {
+  switch (size) {
+    case 'small':
+      return css`
+        font-size: ${theme.font.sizes.xsmall};
+        height: 24px;
+        line-height: 24px;
+        padding: 0px;
+        border-radius: ${theme.border.radius.small};
+      `;
+    case 'large':
+    default:
+      return css`
+        font-size: ${theme.font.sizes.medium};
+        height: 48px;
+        line-height: 48px;
+        padding: 0 24px;
+        border-radius: ${theme.border.radius.small};
+      `;
+  }
+};
 
-  ${({ size }) =>
-    size === 'small'
-      ? `
-      ${storybookButtonSmall}
-  `
-      : size === 'medium'
-      ? `
-      ${storybookButtonMedium}
-  `
-      : `
-  ${storybookButtonLarge}
-`}
+const variantStyles = ({ theme, variant }: any) => {
+  switch (variant) {
+    case 'primary':
+    default:
+      return css`
+        color: ${theme.colors.white};
+        background-color: ${theme.colors.blue};
 
-  ${({ disabled }) =>
-    disabled &&
-    `
-      ${storybookButtonDisabled}
-  `}
+        &:hover {
+          background-color: ${theme.colors.blueDark};
+        }
+      `;
+    case 'secondary':
+      return css`
+        color: ${theme.colors.blue};
+        background-color: ${theme.colors.blueLight};
 
-  ${({ fullWidth }) =>
-    fullWidth &&
-    `
-      ${storybookButtonFullWidth}
-  `}
+        &:hover {
+          background-color: ${theme.colors.blueMediumLight};
+        }
+      `;
+  }
+};
 
-  background-color: ${({ backgroundColor }) => backgroundColor};
+const StyledButton = styled.button<ButtonProps>`
+  ${({ theme }) => baseButtonStyles({ theme })}
+  ${({ theme, size }) => size && sizeStyles({ theme, size })}
+  ${({ variant, theme }) => variant && variantStyles({ variant, theme })}
+  ${({ fullWidth }) => fullWidth && 'width: 100%;'}
 
   ${media.lessThan('medium')`
-    background-color: green;
+    font-size: 10px;
   `}
 `;
 
-export default CustomButton;
+export { StyledButton };

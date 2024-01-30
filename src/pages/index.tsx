@@ -1,5 +1,12 @@
-import Main from 'components/Main';
+import Button from 'components/Button';
 
 export default function Home() {
-  return <Main />;
+  return (
+    <>
+      <h1>Mercado Livre</h1>
+      <Button variant="primary" size="large">
+        bla
+      </Button>
+    </>
+  );
 }
