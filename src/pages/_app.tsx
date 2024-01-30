@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import GlobalStyles from 'styles/global';
 import theme from 'styles/theme';
+import Header from 'components/Header';
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -13,6 +14,9 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="description" content="Teste - Mercado Livre" />
       </Head>
       <GlobalStyles />
+
+      <Header />
+
       <Component {...pageProps} />
     </ThemeProvider>
   );

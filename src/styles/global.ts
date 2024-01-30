@@ -58,6 +58,11 @@ const GlobalStyles: GlobalStyleComponent<
       font-size: ${theme.font.sizes.medium};
       background-color: ${theme.colors.mainBg};
     }
+
+    .container {
+      max-width: ${theme.grid.container};
+      margin: 0 auto;
+    }
   `}
 `;
 
