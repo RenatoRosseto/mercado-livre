@@ -7,6 +7,7 @@ export default {
       xsmall: '4px',
       small: '6px',
       medium: '8px',
+      circle: '50%',
     },
   },
   font: {
@@ -16,6 +17,7 @@ export default {
     normal: 400,
     bold: 600,
     sizes: {
+      xxsmall: '8px',
       xsmall: '12px',
       small: '14px',
       medium: '16px',
@@ -30,6 +32,7 @@ export default {
     blueDark: '#2968c8',
     blueMediumLight: '#4189e6',
     blueLight: '#579af2',
+    red: 'red',
   },
   spacings: {
     xsmall: '4px',
