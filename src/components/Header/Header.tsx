@@ -5,7 +5,7 @@ const Header = () => (
   <StyledHeader>
     <div className="container">
       <StyledHeaderContainer>
-        <Logo href="/">
+        <Logo data-testid="logo" href="/">
           Mercado Livre Brasil - Onde comprar e vender de Tudo
         </Logo>
         <h1>Input buscar</h1>
