@@ -1,5 +1,5 @@
 import { StyledHeader, StyledHeaderContainer, Logo } from './Header.styles';
-import CartLink from 'components/CartLink';
+import CartLink from 'components/atom/CartLink';
 
 const Header = () => (
   <StyledHeader>

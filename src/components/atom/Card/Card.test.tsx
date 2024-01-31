@@ -1,7 +1,7 @@
 import { render } from 'utils/test-utils';
 import '@testing-library/jest-dom';
 
-import Card from './';
+import Card from '.';
 
 describe('Card Component', () => {
   test('Renders the Card component with children', () => {
