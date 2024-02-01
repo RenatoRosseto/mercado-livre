@@ -7,4 +7,5 @@ export interface ButtonProps {
   fullWidth?: boolean;
   ariaLabel?: string;
   onClick?: () => void;
+  buttonLink?: string;
 }

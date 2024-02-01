@@ -10,14 +10,26 @@ const Button: React.FC<ButtonProps> = ({
   ariaLabel,
   onClick,
   children,
+  buttonLink,
 }) => {
+  const buttonClickHandler = () => {
+    if (buttonLink) {
+      window.open(buttonLink, '_blank');
+    } else if (onClick) {
+      onClick();
+    }
+  };
+
+  const ButtonElement = buttonLink ? 'a' : 'button';
+
   return (
     <StyledButton
+      as={ButtonElement}
       variant={variant}
       size={size}
       fullWidth={fullWidth}
       aria-label={ariaLabel}
-      onClick={onClick}
+      onClick={buttonClickHandler}
     >
       {children}
     </StyledButton>

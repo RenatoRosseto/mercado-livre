@@ -13,7 +13,7 @@ import {
 import { HomeCardProps } from './HomeCard.types';
 
 const HomeCard = (props: HomeCardProps) => {
-  const { title, image, imgAlt, text, buttonText, id } = props;
+  const { title, image, imgAlt, text, buttonText, buttonLink, id } = props;
 
   return (
     <Card id={id}>
@@ -26,7 +26,12 @@ const HomeCard = (props: HomeCardProps) => {
           <Text title={text}>{text}</Text>
         </ContainerText>
         <ContainerButton>
-          <Button fullWidth size="small" variant="secondary">
+          <Button
+            fullWidth
+            size="small"
+            variant="secondary"
+            buttonLink={buttonLink}
+          >
             {buttonText}
           </Button>
         </ContainerButton>
