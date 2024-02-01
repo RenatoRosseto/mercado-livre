@@ -30,8 +30,8 @@ export default {
     white: '#fff',
     blue: ' #3483fa',
     blueDark: '#2968c8',
-    blueMediumLight: '#4189e6',
-    blueLight: '#579af2',
+    blueMediumLight: '#a1c7f9',
+    blueLight: '#c2d8f5',
     red: 'red',
   },
   spacings: {
