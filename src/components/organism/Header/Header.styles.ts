@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import media from 'styled-media-query';
 
 const headerStyles = ({ theme }: any) => css`
   background-color: ${theme.colors.yellowBg};
@@ -23,4 +24,8 @@ export const Logo = styled.a`
   text-indent: -9999px;
   overflow: hidden;
   display: block;
+
+  ${media.lessThan('medium')`
+    display: none;
+  `}
 `;
