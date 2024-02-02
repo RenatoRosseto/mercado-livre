@@ -10,6 +10,8 @@ export const ProductItemWrapper = styled.div`
   & span {
     width: 100%;
     text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &:hover {
@@ -19,7 +21,7 @@ export const ProductItemWrapper = styled.div`
 
 export const ProductImage = styled.img`
   max-width: 100%;
-  height: auto;
+  height: 120px;
   margin-bottom: 8px;
 `;
 
@@ -30,6 +32,12 @@ export const Brand = styled.span`
 
 export const ProductName = styled.span`
   margin-bottom: 8px;
+  height: 38px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  width: 100%;
 `;
 
 export const Price = styled.span`

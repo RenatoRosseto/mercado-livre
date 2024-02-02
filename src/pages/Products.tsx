@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+import Loader from 'components/atom/Loader';
 import ProductItem from 'components/molecule/ProductItem';
 import fetchProducts from 'api/fetchProducts';
 
@@ -21,29 +22,36 @@ function Products() {
   `;
 
   const [products, setProducts] = useState<any[]>([]);
+  const [loadingProducts, setLoadingProducts] = useState<boolean>(true);
 
   useEffect(() => {
+    setLoadingProducts(true);
     fetchProducts('vans').then((response: any) => {
       setProducts(response);
     });
+    setLoadingProducts(false);
   }, []);
 
   return (
     <div className="container">
-      <ContainerProductList>
-        {products.map((product: any, index: number) => (
-          <ProductItem
-            key={index}
-            imageUrl={product.thumbnail}
-            brand={
-              product.attributes.find((attr: any) => attr.id === 'BRAND')
-                ?.value_name || ''
-            }
-            name={product.title}
-            price={product.price}
-          />
-        ))}
-      </ContainerProductList>
+      {loadingProducts ? (
+        <Loader />
+      ) : (
+        <ContainerProductList>
+          {products.map((product: any, index: number) => (
+            <ProductItem
+              key={index}
+              imageUrl={product.thumbnail}
+              brand={
+                product.attributes.find((attr: any) => attr.id === 'BRAND')
+                  ?.value_name || ''
+              }
+              name={product.title}
+              price={product.price}
+            />
+          ))}
+        </ContainerProductList>
+      )}
     </div>
   );
 }
