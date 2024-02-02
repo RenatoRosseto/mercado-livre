@@ -24,7 +24,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
     <Card>
       <ProductItemWrapper>
         <ProductImage src={imageUrl} alt={name} />
-        <Brand>{brand ?? ''}</Brand>
+        <Brand>{brand}</Brand>
         <ProductName>{name}</ProductName>
         <Price>{formattedPrice}</Price>
       </ProductItemWrapper>

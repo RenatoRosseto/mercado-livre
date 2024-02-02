@@ -5,6 +5,7 @@ export const ProductItemWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 8px;
+  cursor: pointer;
 
   & span {
     width: 100%;

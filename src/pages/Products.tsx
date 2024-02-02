@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import ProductItem from 'components/molecule/ProductItem';
@@ -20,28 +20,29 @@ function Products() {
     }
   `;
 
-  const productData = {
-    imageUrl: 'http://http2.mlstatic.com/D_819865-MLB71655082508_092023-O.jpg',
-    brand: 'Retro',
-    name: 'Tenis Masculino Feminino Classico Sketista Retro Old School',
-    price: 89.9,
-  };
+  const [products, setProducts] = useState<any[]>([]);
 
   useEffect(() => {
     fetchProducts('vans').then((response: any) => {
-      console.log('produtos:', response);
+      setProducts(response);
     });
   }, []);
 
   return (
     <div className="container">
       <ContainerProductList>
-        <ProductItem {...productData} />
-        <ProductItem {...productData} />
-        <ProductItem {...productData} />
-        <ProductItem {...productData} />
-        <ProductItem {...productData} />
-        <ProductItem {...productData} />
+        {products.map((product: any, index: number) => (
+          <ProductItem
+            key={index}
+            imageUrl={product.thumbnail}
+            brand={
+              product.attributes.find((attr: any) => attr.id === 'BRAND')
+                ?.value_name || ''
+            }
+            name={product.title}
+            price={product.price}
+          />
+        ))}
       </ContainerProductList>
     </div>
   );
