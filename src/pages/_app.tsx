@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import GlobalStyles from 'styles/global';
 import theme from 'styles/theme';
-import Header from 'components/molecule/Header';
+import Header from 'components/organism/Header';
 
 function App({ Component, pageProps }: AppProps) {
   return (
