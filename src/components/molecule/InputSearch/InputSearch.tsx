@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
 
@@ -14,6 +15,8 @@ import {
 } from './InputSearch.styles';
 
 const InputSearch = () => {
+  const router = useRouter();
+
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResultProps[]>([]);
   const [showResults, setShowResults] = useState(false);
@@ -32,6 +35,8 @@ const InputSearch = () => {
 
     setSearchResults(newSearchResults);
     setSearchTerm('');
+
+    router.push('/Products');
   };
 
   const handleRemoveSearchTerm = (id: string) => {
