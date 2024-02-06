@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ProductItemWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,4 +44,20 @@ export const ProductName = styled.span`
 export const Price = styled.span`
   font-size: 18px;
   font-weight: bold;
+`;
+
+export const CartButton = styled.button`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 `;
