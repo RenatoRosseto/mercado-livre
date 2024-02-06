@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 
 import Loader from 'components/atom/Loader';
 import ProductItem from 'components/molecule/ProductItem';
 import fetchProducts from 'api/fetchProducts';
+import AppContext from 'context/AppContext';
 
 function Products() {
   const ContainerProductList = styled.div`
@@ -24,13 +25,15 @@ function Products() {
   const [products, setProducts] = useState<any[]>([]);
   const [loadingProducts, setLoadingProducts] = useState<boolean>(true);
 
+  const { searchTerm } = useContext(AppContext);
+
   useEffect(() => {
     setLoadingProducts(true);
-    fetchProducts('vans').then((response: any) => {
+    fetchProducts(searchTerm).then((response: any) => {
       setProducts(response);
     });
     setLoadingProducts(false);
-  }, []);
+  }, [searchTerm]);
 
   return (
     <div className="container">

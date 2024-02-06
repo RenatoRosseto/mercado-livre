@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
@@ -13,29 +13,33 @@ import {
   SearchResultItem,
   RemoveButton,
 } from './InputSearch.styles';
+import AppContext from 'context/AppContext';
 
 const InputSearch = () => {
   const router = useRouter();
 
-  const [searchTerm, setSearchTerm] = useState('');
+  const { setSearchTerm } = useContext(AppContext);
+
   const [searchResults, setSearchResults] = useState<SearchResultProps[]>([]);
   const [showResults, setShowResults] = useState(false);
+  const [auxSearchTerm, setAuxSearchTerm] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
+    setAuxSearchTerm(event.target.value);
   };
 
   const handleSearch = () => {
     const newSearchResults = [
-      { id: Date.now().toString(), term: searchTerm },
+      { id: Date.now().toString(), term: auxSearchTerm },
       ...searchResults,
     ];
 
     Cookies.set('searchTerms', JSON.stringify(newSearchResults));
 
     setSearchResults(newSearchResults);
-    setSearchTerm('');
+    setAuxSearchTerm('');
 
+    setSearchTerm(auxSearchTerm);
     router.push('/Products');
   };
 
@@ -64,7 +68,7 @@ const InputSearch = () => {
       <Input
         type="text"
         placeholder="Buscar produtos, marcas e muito mais..."
-        value={searchTerm}
+        value={auxSearchTerm}
         onChange={handleInputChange}
         onFocus={() => setShowResults(true)}
         onBlur={() => setTimeout(() => setShowResults(false), 100)}

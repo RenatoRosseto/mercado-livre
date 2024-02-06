@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyles from 'styles/global';
 import theme from 'styles/theme';
 import Header from 'components/organism/Header';
+import Provider from 'context/Provider';
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -15,9 +16,11 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyles />
 
-      <Header />
+      <Provider>
+        <Header />
 
-      <Component {...pageProps} />
+        <Component {...pageProps} />
+      </Provider>
     </ThemeProvider>
   );
 }
